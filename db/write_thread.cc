@@ -487,10 +487,10 @@ size_t WriteThread::EnterAsBatchGroupLeader(Writer* leader,
     }
 
     auto batch_size = WriteBatchInternal::ByteSize(w->batches);
-    if (size + batch_size > max_size) {
+    /*if (size + batch_size > max_size) {
       // Do not make batch too big
       break;
-    }
+    }*/
 
     w->write_group = write_group;
     size += batch_size;
