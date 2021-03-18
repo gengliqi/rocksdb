@@ -434,10 +434,10 @@ size_t WriteThread::EnterAsBatchGroupLeader(Writer* leader,
   // Allow the group to grow up to a maximum size, but if the
   // original write is small, limit the growth so we do not slow
   // down the small write too much.
-  size_t max_size = 1 << 20;
+  /*size_t max_size = 1 << 20;
   if (size <= (128 << 10)) {
     max_size = size + (128 << 10);
-  }
+  }*/
 
   leader->write_group = write_group;
   write_group->leader = leader;
@@ -487,10 +487,10 @@ size_t WriteThread::EnterAsBatchGroupLeader(Writer* leader,
     }
 
     auto batch_size = WriteBatchInternal::ByteSize(w->batches);
-    if (size + batch_size > max_size) {
+    /*if (size + batch_size > max_size) {
       // Do not make batch too big
       break;
-    }
+    }*/
 
     w->write_group = write_group;
     size += batch_size;
