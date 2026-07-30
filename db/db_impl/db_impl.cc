@@ -5986,6 +5986,12 @@ Status DBImpl::IngestExternalFiles(
       }
       if (consumed_seqno_count > 0) {
         const SequenceNumber last_seqno = versions_->LastSequence();
+        ROCKS_LOG_WARN(
+            immutable_db_options_.info_log,
+            "[sequence-number-repro] consumed_seqno_count=%d, "
+            "last_seqno=%" PRIu64 ", sleeping for 3 seconds before updating "
+            "VersionSet sequence numbers",
+            consumed_seqno_count, last_seqno);
         std::this_thread::sleep_for(std::chrono::seconds(3));
         versions_->SetLastAllocatedSequence(last_seqno + consumed_seqno_count);
         versions_->SetLastPublishedSequence(last_seqno + consumed_seqno_count);
