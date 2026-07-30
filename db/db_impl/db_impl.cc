@@ -5986,6 +5986,7 @@ Status DBImpl::IngestExternalFiles(
       }
       if (consumed_seqno_count > 0) {
         const SequenceNumber last_seqno = versions_->LastSequence();
+        std::this_thread::sleep_for(std::chrono::seconds(1));
         versions_->SetLastAllocatedSequence(last_seqno + consumed_seqno_count);
         versions_->SetLastPublishedSequence(last_seqno + consumed_seqno_count);
         versions_->SetLastSequence(last_seqno + consumed_seqno_count);
