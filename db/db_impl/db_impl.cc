@@ -5989,10 +5989,10 @@ Status DBImpl::IngestExternalFiles(
         ROCKS_LOG_WARN(
             immutable_db_options_.info_log,
             "[sequence-number-repro] consumed_seqno_count=%d, "
-            "last_seqno=%" PRIu64 ", sleeping for 3 seconds before updating "
+            "last_seqno=%" PRIu64 ", sleeping for 10ms before updating "
             "VersionSet sequence numbers",
             consumed_seqno_count, last_seqno);
-        std::this_thread::sleep_for(std::chrono::seconds(3));
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
         const SequenceNumber target_seqno =
             last_seqno + static_cast<SequenceNumber>(consumed_seqno_count);
